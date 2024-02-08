@@ -1,5 +1,5 @@
-#ifndef MAZE_H
-#define MAZE_H
+#ifndef THEMAZE_H
+#define THEMAZE_H
 
 /**
  * Inclusion of SDL and C libraries
@@ -9,4 +9,10 @@
 #include <SDL2/SDL.h>
 #include <math.h>
 
-#endif
+/**
+ * The definition of global variables
+ */
+#define SCREEN_WIDTH 1280
+#define SCREEN_HEIGHT 720
+
+#endif/* THEMAZE_H */
