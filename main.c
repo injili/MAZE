@@ -1,26 +1,29 @@
+#include <SDL2/SDL.h>
 #include <stdio.h>
-#include <stdlib.h>
-#include <GL/glut.h>
 
-void display ()
-{
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glutSwapBuffers();
-}
+const int SCREEN_WIDTH = 640;
+const int SCREEN_HEIGHT = 480;
 
-void init ()
+int main ( int argc, char* args[] )
 {
-	glClearColor(0.3, 0.3, 0.3, 0);
-	gluOrtho2D(0, 1024, 512, 0);
-}
+	//the window will be rendered to
+	SDL_Window* window = NULL;
 
-int main (int argc, char* argv[])
-{
-	glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);
-	glutInitWindowSize(1024, 512);
-	glutCreateWindow("the maze");
-	init();
-	glutDisplayFunc(display);
-	glutMainLoop();
+	//the surface contained by the window
+	SDL_Surface* screenSurface = NULL;
+
+	//Initialize SDL
+	if ( SDL_Init(SDL_INIT_VIDEO ) < 0 )
+	{
+		printf ( "SDL could not initialize! SDL Error %s\n", SDL_GetError() );
+	}
+	else {
+		//create window
+		window = SDL_CreateWindow ( "SDL MAZE", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
+					   SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
+		if (window == NULL ) {
+			printf ( "Window could not be created! SDL_Error: %s\n", SDL_GetError() );
+		}
+	}
+	return (0);
 }
