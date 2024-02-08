@@ -16,8 +16,35 @@
 #define SCREEN_HEIGHT 720
 
 /**
+ * Structures go here
+ */
+typedef struct {
+    int quit;
+} State;
+
+typedef struct {
+    struct {
+        float x;
+        float y;
+    } pos;
+    struct {
+        float x;
+        float y;
+    } dir;
+    struct {
+        float x;
+        float y;
+    } plane;
+} Player;
+
+/**
+ * External declarations
+ */
+extern State state;
+extern Player player;
+
+/**
  * The functions come here
  */
-void gameLoop(State *state, Player *player, float *motionSpeed, int *mouse_xrel, const uint8_t *keystate, float *rotSpeed);
-
+void gameLoop(void);
 #endif/* THEMAZE_H */

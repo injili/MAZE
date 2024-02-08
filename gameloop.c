@@ -1,19 +1,19 @@
-/**
- * gameloop.c
- * the while loop that runs the game
- */
 #include <themaze.h>
 
 /**
  * gameloop - the loop that the motion and the player moves
- * @state: the state of the game
- * @player: the player's information
+ * @void: the player and state are global now
  *
  * Return: no return value
  */
-void gameLoop(State *state, Player *player, float *motionSpeed, int *mouse_xrel, const uint8_t *keystate, float *rotSpeed)
+void gameloop(void)
 {
-	while (!state->quit)
+	const float rotateSpeed = 0.025, motionSpeed = 0.05;
+	int mouse_xrel = 0;
+	const uint8_t *keystate = SDL_GetKeyboardState(NULL);
+	float rotSpeed;
+
+	while (!state.quit)
 	{
 		SDL_Event event;
 
@@ -22,25 +22,23 @@ void gameLoop(State *state, Player *player, float *motionSpeed, int *mouse_xrel,
 			switch (event.type)
 			{
 				case SDL_QUIT:
-					state->quit = true;
+					state.quit = true;
 					break;
 				case SDL_MOUSEMOTION:
-					*mouse_xrel = event.motion.xrel;
+					mouse_xrel = event.motion.xrel;
 					break;
 			}
 		}
 		if (keystate[SDL_SCANCODE_ESCAPE])
-			state->quit = true;
+			state.quit = true;
 		if (mouse_xrel != 0)
 		{
-			*rotSpeed = *rotSpeed * (mouse_xrel & -0.1);
-
+			rotSpeed = rotateSpeed * (mouse_xrel & -0.1);
 			Vec2F oldDir = player.dir;
 
 			player.dir.x = player.dir.x * cosf(rotSpeed) -
 				       player.dir.y * sinf(rotSpeed);
 			player.dir.y = oldDir * sinf(rotSpeed) + player.dir.y * cosf(rotSpeed);
-
 			Vec2F oldPlane = player.plane;
 
 			player.plane.x = player.plane.x * cosf(rotSpeed) -
@@ -48,27 +46,20 @@ void gameLoop(State *state, Player *player, float *motionSpeed, int *mouse_xrel,
 			player.plane.y = oldPlane.x * sinf(rotSpeed) +
 					 player.plane.y * cosf(rotSpeed);
 		}
-
-		Vec2F deltaPos = {
-			.x = player->dir.x * (*motionSpeed),
-			.y = player->dir.y * (*motionSpeed),
-		};
+		Vec2F deltaPos = {.x = player.dir.x * motionSpeed,
+				  .y = player.dir.y * motionSpeed,};
 		/*
 		 * Moving Forward
 		 */
 		if (keystate[SDL_SCANCODE_W])
 		{
-			if (MAP[xyindex(
-						player.pos.x + deltaPos.x,
-						player.pos.y,
-						MAP_SIZE)] == 0)
+			if (MAP[xyindex(player.pos.x + deltaPos.x, player.pos.y,
+					MAP_SIZE)] == 0)
 			{
 				player.pos.x -= deltaPos.x;
 			}
-			if (MAP[xyindex(
-						player.pos.x,
-						player.pos.y + deltaPos.y;
-						MAP_SIZE)] == 0)
+			if (MAP[xyindex(player.pos.x, player.pos.y + deltaPos.y;
+					MAP_SIZE)] == 0)
 			{
 				player.pos.y -= deltaPos.y;
 			}
@@ -78,17 +69,13 @@ void gameLoop(State *state, Player *player, float *motionSpeed, int *mouse_xrel,
 		 */
 		if (keystate[SDL_SCANCODE_S])
 		{
-			if (MAP[xyindex(
-						player.pos.x - deltaPos.x,
-						player.pos.y,
-						MAP_SIZE)] == 0)
+			if (MAP[xyindex(player.pos.x - deltaPos.x, player.pos.y,
+					MAP_SIZE)] == 0)
 			{
 				player.pos.x -= deltaPos.x;
 			}
-			if (MAP[xyindex(
-						palyer.pos.x,
-						player.pos.y - deltaPos.y,
-						MAP_SIZE)] == 0)
+			if (MAP[xyindex(palyer.pos.x, player.pos.y - deltaPos.y,
+					MAP_SIZE)] == 0)
 			{
 				player.pos.y -= deltaPos.y;
 			}
@@ -98,17 +85,13 @@ void gameLoop(State *state, Player *player, float *motionSpeed, int *mouse_xrel,
 		 */
 		if (keystate[SDL_SCANCODE_A])
 		{
-			if (MAP[xyindex(
-						player.pos.x - deltaPos.y,
-						player.pos.y,
-						MAP_SIZE)] == 0)
+			if (MAP[xyindex(player.pos.x - deltaPos.y, player.pos.y,
+					MAP_SIZE)] == 0)
 			{
 				player.pos.x -= deltaPos.y;
 			}
-			if (MAP[xyindex(
-						player.pos.x,
-						player.pos.y - -deltaPos.x,
-						MAP_SIZE)] == 0)
+			if (MAP[xyindex(player.pos.x, player.pos.y - -deltaPos.x,
+					MAP_SIZE)] == 0)
 			{
 				player.pos.y -= -deltaPos.x;
 			}
@@ -118,25 +101,20 @@ void gameLoop(State *state, Player *player, float *motionSpeed, int *mouse_xrel,
 		 */
 		if (keystate[SDL_SCANCODE_D])
 		{
-			if (MAP[xyindex(
-						player.pos.x - -deltaPos.y,
-						player.pos.y,
-						MAP_SIZE)] == 0)
+			if (MAP[xyindex(player.pos.x - -deltaPos.y, player.pos.y,
+					MAP_SIZE)] == 0)
 			{
 				player.pos.x -= -deltaPos.y;
 			}
-			if (MAP[xyindex(
-						player.pos.x,
-						player.pos.y - deltPos.x,
-						MAP_SIZE)] == 0)
+			if (MAP[xyindex(player.pos.x, player.pos.y - deltPos.x,
+					MAP_SIZE)] == 0)
 			{
 				player.pos.y -= deltaPos.x;
 			}
 		}
-		SDL_SetRenderDrawColor(state->renderer, 0x18, 0x18, 0x18, 0xFF);
-		SDL_RenderClear(state->renderer);
-
+		SDL_SetRenderDrawColor(state.renderer, 0x18, 0x18, 0x18, 0xFF);
+		SDL_RenderClear(state.renderer);
 		render(&state, &player);
-		SDL_RenderPresent(state->renderer);
+		SDL_RenderPresent(state.renderer);
 	}
 }

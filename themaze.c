@@ -7,11 +7,6 @@
  */
 int main(void)
 {
-	const float rotateSpeed = 0.025, motionSpeed = 0.05;
-	int mouse_xrel = 0;
-	const uint8_t *keystate = SDL_GetKeyboardState(NULL);
-	float rotSpeed;
-
 	ASSERT(!SDL_Init(SDL_INIT_VIDEO),
 		"SDL Failed ro initialize; %s\n",
 		SDL_GetError();
