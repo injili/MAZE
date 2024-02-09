@@ -18,3 +18,6 @@ const uint8_t MAP[MAP_SIZE * MAP_SIZE] = {
 	1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
 	1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
 };
+ColorRGBA RGBA_Red   = {.r = 0xFF, .g = 0x00, .b = 0x00, .a = 0xFF};
+ColorRGBA RGBA_Green = {.r = 0x00, .g = 0xFF, .b = 0x00, .a = 0xFF};
+ColorRGBA RGBA_Blue  = {.r = 0x00, .g = 0x00, .b = 0xFF, .a = 0xFF};

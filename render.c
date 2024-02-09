@@ -9,10 +9,6 @@
  */
 void render(State *state, Player *player)
 {
-	ColorRGBA RGBA_Red   = {.r = 0xFF, .g = 0x00, .b = 0x00, .a = 0xFF};
-	ColorRGBA RGBA_Green = {.r = 0x00, .g = 0xFF, .b = 0x00, .a = 0xFF};
-	ColorRGBA RGBA_Blue  = {.r = 0x00, .g = 0x00, .b = 0xFF, .a = 0xFF};
-
 	for (int x = 0; x < SCREEN_WIDTH; ++x)
 	{
 		float cameraX = 2 * x / (float)SCREEN_WIDTH - 1;
@@ -37,6 +33,7 @@ void render(State *state, Player *player)
 			.x = (rayDir.x == 0) ? 1e30 : fabsf(1 / rayDir.x),
 			.y = (rayDir.y == 0) ? 1e30 : fabsf(1 / rayDir.y),
 		};
+
 		if (rayDir.x < 0)
 		{
 			stepDir.x = -1;

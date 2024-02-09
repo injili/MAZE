@@ -68,6 +68,9 @@ extern State state;
 extern const float playerFOV;
 extern const float maxDepth;
 extern const uint8_t MAP[MAP_SIZE * MAP_SIZE];
+extern ColorRGBA RGBA_Red;
+extern ColorRGBA RGBA_Green;
+extern ColorRGBA RGBA_Blue;
 
 /**
  * The functions come here
