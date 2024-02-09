@@ -63,8 +63,8 @@ typedef struct{
 /**
  * External declarations
  */
-extern State state;
 extern Player player;
+extern State state;
 extern const uint8_t MAP[MAP_SIZE * MAP_SIZE];
 
 /**
