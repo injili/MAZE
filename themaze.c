@@ -1,5 +1,7 @@
 #include "themaze.h"
 
+const float playerFOV = (PI / 2.0f);
+const float maxDepth = 20.0f;
 State state = {
 	.quit = false,
 };
@@ -136,9 +138,6 @@ void gameloop(void)
  */
 int main(void)
 {
-	const float playerFOV = (PI / 2.0f);
-	const float maxDepth = 20.0f;
-
 	ASSERT(!SDL_Init(SDL_INIT_VIDEO),
 		"SDL Failed ro initialize; %s\n",
 		SDL_GetError());
@@ -153,6 +152,13 @@ int main(void)
 	ASSERT(state.window,
 	       "failed to create SDL rendere: %s\n",
 	       SDL_GetError());
+
+	state.renderer =
+		SDL_CreateRenderer(state.window, -1, SDL_RENDERER_PRESENTVSYNC);
+
+	ASSERT(state.renderer,
+		   "failed to create SDL renderer: %s\n",
+		   SDL_GetError());
 
 	SDL_SetHint(SDL_HINT_MOUSE_RELATIVE_MODE_WARP, "1");
 	SDL_SetRelativeMouseMode(true);
