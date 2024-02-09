@@ -20,18 +20,18 @@
 /**
  * The definition of global variables
  */
-#define SCREEN_WIDTH 1280
-#define SCREEN_HEIGHT 720
-#define MIN(x, y) (x < y ? x : y)
-#define MAX(x, y) (x > y ? x : y)
-#define MAP_SIZE 16
-#define PI 3.14159265f
+
 #define ASSERT(cond, ...)                                                      \
   if (!cond) {                                                                 \
     fprintf(stderr, __VA_ARGS__);                                              \
     exit(1);                                                                   \
   }
-
+#define MIN(x, y) (x < y ? x : y)
+#define MAX(x, y) (x > y ? x : y)
+#define SCREEN_WIDTH 1280
+#define SCREEN_HEIGHT 720
+#define MAP_SIZE 16
+#define PI 3.14159265f
 
 /**
  * Structures go here
@@ -65,6 +65,8 @@ typedef struct{
  */
 extern Player player;
 extern State state;
+extern const float playerFOV;
+extern const float maxDepth;
 extern const uint8_t MAP[MAP_SIZE * MAP_SIZE];
 
 /**

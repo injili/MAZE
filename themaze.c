@@ -7,6 +7,9 @@
  */
 int main(void)
 {
+	const float playerFOV = (PI / 2.0f);
+	const float maxDepth = 20.0f;
+
 	ASSERT(!SDL_Init(SDL_INIT_VIDEO),
 		"SDL Failed ro initialize; %s\n",
 		SDL_GetError());
