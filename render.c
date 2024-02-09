@@ -12,15 +12,6 @@ void render(State *state, Player *player)
 	for (int x = 0; x < SCREEN_WIDTH; ++x)
 	{
 		float cameraX = 2 * x / (float)SCREEN_WIDTH - 1;
-		float perpWallDist;
-		Vec2I stepDir = {};
-		bool hit = false;
-		Vec2F sideDist = {};
-		Side side;
-		int lineHeight = (int)(SCREEN_HEIGHT / perpWallDist);
-		int drawStart = -lineHeight / 2 + SCREEN_HEIGHT / 2;
-		int drawEnd = lineHeight / 2 + SCREEN_HEIGHT / 2;
-		ColorRGBA color;
 		Vec2F rayDir = {
 			.x = player->dir.x + player->plane.x * cameraX,
 			.y = player->dir.y + player->plane.y * cameraX,
@@ -29,10 +20,15 @@ void render(State *state, Player *player)
 			.x = (int)player->pos.x,
 			.y = (int)player->pos.y
 		};
+		Vec2F sideDist = {};
 		Vec2F deltaDist = {
 			.x = (rayDir.x == 0) ? 1e30 : fabsf(1 / rayDir.x),
 			.y = (rayDir.y == 0) ? 1e30 : fabsf(1 / rayDir.y),
 		};
+		float perpWallDist;
+		Vec2I stepDir = {};
+		bool hit = false;
+		Side side;
 
 		if (rayDir.x < 0)
 		{
@@ -52,6 +48,7 @@ void render(State *state, Player *player)
 			stepDir.y = 1;
 			sideDist.y = (mapBox.y + 1.0f - player->pos.y) * deltaDist.y;
 		}
+
 		while (!hit)
 		{
 			if (sideDist.x < sideDist.y)
@@ -79,10 +76,16 @@ void render(State *state, Player *player)
 				perpWallDist = (sideDist.y - deltaDist.y);
 				break;
 		}
+		int lineHeight = (int)(SCREEN_HEIGHT / perpWallDist);
+		int drawStart = -lineHeight / 2 + SCREEN_HEIGHT / 2;
+
 		if (drawStart < 0)
 			drawStart = 0;
+		int drawEnd = lineHeight / 2 + SCREEN_HEIGHT / 2;
 		if (drawEnd >= SCREEN_HEIGHT)
 			drawEnd = SCREEN_HEIGHT;
+
+		ColorRGBA color;
 		switch (MAP[xy2index(mapBox.x, mapBox.y, MAP_SIZE)])
 		{
 			case 1:
