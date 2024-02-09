@@ -1,23 +1,5 @@
-#include <themaze.h>
+#include "themaze.h"
 
-const uint8_t MAP[MAP_SIZE * MAP_SIZE] = {
-	1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-	1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-	1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-	1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-	1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-	1, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-	1, 0, 0, 0, 3, 3, 3, 0, 0, 0, 0, 0, 0, 2, 0, 1,
-	1, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 2, 0, 1,
-	1, 0, 0, 0, 0, 0, 3, 2, 2, 2, 2, 2, 2, 2, 0, 1,
-	1, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 2, 0, 0, 0, 1,
-	1, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 2, 0, 0, 0, 1,
-	1, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 2, 0, 0, 0, 1,
-	1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 1,
-	1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-	1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-	1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-}
 /**
  * main - check the code
  *
@@ -27,7 +9,7 @@ int main(void)
 {
 	ASSERT(!SDL_Init(SDL_INIT_VIDEO),
 		"SDL Failed ro initialize; %s\n",
-		SDL_GetError();
+		SDL_GetError());
 	State state = {
 		.quit = false,
 	};
@@ -51,7 +33,7 @@ int main(void)
 		.plane = {.x = 0.0f, .y = 0.66f},
 	};
 
-	gameloop(&state, &player, &motionSpeed, &mouse_xrel, keystate, &rotSpeed);
+	gameloop();
 
 	SDL_DestroyRenderer(state.renderer);
 	SDL_DestroyWindow(state.window);

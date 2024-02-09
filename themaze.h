@@ -70,6 +70,7 @@ extern const uint8_t MAP[MAP_SIZE * MAP_SIZE];
 /**
  * The functions come here
  */
-void gameLoop(void);
+void gameloop(void);
 int xy2index(int x, int y, int w);
+void render(State *state, Player* player);
 #endif/* THEMAZE_H */

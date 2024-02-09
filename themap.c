@@ -1,4 +1,4 @@
-#include <themaze.h>
+#include "themaze.h"
 
 const uint8_t MAP[MAP_SIZE * MAP_SIZE] = {
 	1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,

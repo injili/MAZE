@@ -1,4 +1,4 @@
-#include <themaze.h>
+#include "themaze.h"
 
 /**
  * render - draws the images on window
