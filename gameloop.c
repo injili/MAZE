@@ -11,15 +11,6 @@ int xy2index(int x, int y, int w) {
     return y * w + x;
 }
 
-State state = {
-	.quit = false,
-};
-Player player = {
-	.pos = {.x = 4.0f, .y = 4.0f},
-	.dir = {.x = -1.0f, .y = 0.0f},
-	.plane = {.x = 0.0f, .y = 0.66f},
-};
-
 /**
  * gameloop - the loop that the motion and the player moves
  * @void: the player and state are global now
@@ -28,15 +19,22 @@ Player player = {
  */
 void gameloop(void)
 {
+	State state = {
+		.quit = false,
+	};
+ 	Player player = {
+		.pos = {.x = 4.0f, .y = 4.0f},
+		.dir = {.x = -1.0f, .y = 0.0f},
+		.plane = {.x = 0.0f, .y = 0.66f},
+	};
 	const float rotateSpeed = 0.025, motionSpeed = 0.05;
-	int mouse_xrel = 0;
+	int mouse_xrel;
 	const uint8_t *keystate = SDL_GetKeyboardState(NULL);
-	float rotSpeed;
 
 	while (!state.quit)
 	{
 		SDL_Event event;
-
+		mouse_xrel = 0;
 		while (SDL_PollEvent(&event))
 		{
 			switch (event.type)
@@ -53,7 +51,7 @@ void gameloop(void)
 			state.quit = true;
 		if (mouse_xrel != 0)
 		{
-			rotSpeed = rotateSpeed * (mouse_xrel * -0.1);
+			float rotSpeed = rotateSpeed * (mouse_xrel * -0.1);
 			Vec2F oldDir = player.dir;
 
 			player.dir.x = player.dir.x * cosf(rotSpeed) -
