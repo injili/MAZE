@@ -1,5 +1,15 @@
 #include "themaze.h"
 
+State state = {
+	.quit = false,
+};
+
+Player player = {
+	.pos = {.x = 4.0f, .y = 4.0f},
+	.dir = {.x = -1.0f, .y = 0.0f},
+	.plane = {.x = 0.0f, .y = 0.66f},
+};
+
 /**
  * gameloop - the loop that the motion and the player moves
  * @void: the player and state are global now
@@ -132,9 +142,7 @@ int main(void)
 	ASSERT(!SDL_Init(SDL_INIT_VIDEO),
 		"SDL Failed ro initialize; %s\n",
 		SDL_GetError());
-	State state = {
-		.quit = false,
-	};
+
 	state.window =
 		SDL_CreateWindow("Raycast",
 				 SDL_WINDOWPOS_CENTERED_DISPLAY(0),
@@ -148,12 +156,6 @@ int main(void)
 
 	SDL_SetHint(SDL_HINT_MOUSE_RELATIVE_MODE_WARP, "1");
 	SDL_SetRelativeMouseMode(true);
-
-	Player player = {
-		.pos = {.x = 4.0f, .y = 4.0f},
-		.dir = {.x = -1.0f, .y = 0.0f},
-		.plane = {.x = 0.0f, .y = 0.66f},
-	};
 
 	gameloop();
 
