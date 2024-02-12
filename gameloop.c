@@ -1,5 +1,13 @@
 #include "themaze.h"
 
+State state = {
+	.quit = false,
+};
+Player player = {
+	.pos = {.x = 4.0f, .y = 4.0f},
+	.dir = {.x = -1.0f, .y = 0.0f},
+	.plane = {.x = 0.0f, .y = 0.66f},
+};
 /**
  * xy2index - x y indexer
  * @y: the player's y position
@@ -131,14 +139,6 @@ void gameloop(void)
 	const float rotateSpeed = 0.025, motionSpeed = 0.05;
 	int mouse_xrel;
 	const uint8_t *keystate = SDL_GetKeyboardState(NULL);
-	State state = {
-		.quit = false,
-	};
-	Player player = {
-		.pos = {.x = 4.0f, .y = 4.0f},
-		.dir = {.x = -1.0f, .y = 0.0f},
-		.plane = {.x = 0.0f, .y = 0.66f},
-	};
 
 	while (!state.quit)
 	{
