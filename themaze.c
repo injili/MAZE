@@ -1,5 +1,13 @@
 #include "themaze.h"
 
+State state = {
+	.quit = false,
+};
+Player player = {
+	.pos = {.x = 4.0f, .y = 4.0f},
+	.dir = {.x = -1.0f, .y = 0.0f},
+	.plane = {.x = 0.0f, .y = 0.66f},
+};
 /**
  * playerDirection - the direction the player is facing
  * @mouse_xrel: mouse entry
@@ -158,14 +166,6 @@ int main(void)
 {
 	const float playerFOV = (PI / 2.0f);
 	const float maxDepth = 20.0f;
-	State state = {
-		.quit = false,
-	};
-	Player player = {
-		.pos = {.x = 4.0f, .y = 4.0f},
-		.dir = {.x = -1.0f, .y = 0.0f},
-		.plane = {.x = 0.0f, .y = 0.66f},
-	};
 
 	ASSERT(!SDL_Init(SDL_INIT_VIDEO),
 		"SDL Failed ro initialize; %s\n",
