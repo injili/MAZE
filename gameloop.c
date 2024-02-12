@@ -1,13 +1,5 @@
 #include "themaze.h"
 
-State state = {
-	.quit = false,
-};
-Player player = {
-	.pos = {.x = 4.0f, .y = 4.0f},
-	.dir = {.x = -1.0f, .y = 0.0f},
-	.plane = {.x = 0.0f, .y = 0.66f},
-};
 /**
  * xy2index - x y indexer
  * @y: the player's y position
