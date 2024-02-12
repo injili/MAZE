@@ -68,12 +68,12 @@ void gameloop(void)
 			if (MAP[xy2index(player.pos.x + deltaPos.x, player.pos.y,
 					MAP_SIZE)] == 0)
 			{
-				player.pos.x -= deltaPos.x;
+				player.pos.x += deltaPos.x;
 			}
 			if (MAP[xy2index(player.pos.x, player.pos.y + deltaPos.y,
 					MAP_SIZE)] == 0)
 			{
-				player.pos.y -= deltaPos.y;
+				player.pos.y += deltaPos.y;
 			}
 		}
 		/**
