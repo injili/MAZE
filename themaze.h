@@ -75,7 +75,9 @@ extern ColorRGBA RGBA_Blue;
 /**
  * The functions come here
  */
-void gameloop(State *state, Player *player);
+void playerDirection(Player *player, int mouse_xrel, float rotateSpeed);
+void moveX(Player *player, const uint8_t *keystate, const float motionSpeed);
+void moveY(Player *player, const uint8_t *keystate, const float motionSpeed);
 int xy2index(int x, int y, int w);
 void render(State *state, Player* player);
 #endif/* THEMAZE_H */
