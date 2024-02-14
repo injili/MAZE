@@ -75,7 +75,7 @@ extern ColorRGBA RGBA_Blue;
 /**
  * The functions come here
  */
-void gameloop(void);
+void gameloop(State *state, Player *player);
 int xy2index(int x, int y, int w);
 void render(State *state, Player* player);
 #endif/* THEMAZE_H */
