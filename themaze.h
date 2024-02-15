@@ -71,6 +71,8 @@ extern const uint8_t MAP[MAP_SIZE * MAP_SIZE];
 extern ColorRGBA RGBA_Red;
 extern ColorRGBA RGBA_Green;
 extern ColorRGBA RGBA_Blue;
+extern ColorRGBA colorCeiling;
+extern ColorRGBA colorFloor;
 
 /**
  * The functions come here

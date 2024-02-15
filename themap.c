@@ -21,3 +21,5 @@ const uint8_t MAP[MAP_SIZE * MAP_SIZE] = {
 ColorRGBA RGBA_Red   = {.r = 0xFF, .g = 0x00, .b = 0x00, .a = 0xFF};
 ColorRGBA RGBA_Green = {.r = 0x00, .g = 0xFF, .b = 0x00, .a = 0xFF};
 ColorRGBA RGBA_Blue  = {.r = 0x00, .g = 0x00, .b = 0xFF, .a = 0xFF};
+ColorRGBA colorCeiling = {.r = 0x00, .g = 0x44, .b = 0x88, .a = 0xFF};
+ColorRGBA colorFloor = {.r = 0x88, .g = 0x44, .b = 0x00, .a = 0xFF};

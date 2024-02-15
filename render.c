@@ -106,5 +106,9 @@ void render(State *state, Player *player)
 		}
 		SDL_SetRenderDrawColor(state->renderer, color.r, color.g, color.b, color.a);
 		SDL_RenderDrawLine(state->renderer, x, drawStart, x, drawEnd);
+		SDL_SetRenderDrawColor(state->renderer, colorCeiling.r, colorCeiling.g, colorCeiling.b, colorCeiling.a);
+		SDL_RenderDrawLine(state->renderer, x, 0, x, drawStart);
+		SDL_SetRenderDrawColor(state->renderer, colorFloor.r, colorFloor.g, colorFloor.b, colorFloor.a);
+		SDL_RenderDrawLine(state->renderer, x, drawEnd, x, SCREEN_HEIGHT);
 	}
 }
