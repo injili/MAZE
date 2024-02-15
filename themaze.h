@@ -73,6 +73,8 @@ extern ColorRGBA RGBA_Green;
 extern ColorRGBA RGBA_Blue;
 extern ColorRGBA colorCeiling;
 extern ColorRGBA colorFloor;
+extern const uint8_t MOSSYSTONE_TEXTURE[];
+extern const uint8_t PURPLESTONE_TEXTURE[];
 
 /**
  * The functions come here

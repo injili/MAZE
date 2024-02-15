@@ -85,20 +85,39 @@ void render(State *state, Player *player)
 		if (drawEnd >= SCREEN_HEIGHT)
 			drawEnd = SCREEN_HEIGHT;
 
+		int texWidth = ;
+		int texX;
+		if (side == EastWest)
+			texX = (int)(player->pos.y + perpWallDist * rayDir.y);
+		else
+			texX = (int)(player->pos.x + perpWallDist * rayDir.x);
+		texX %= texWidth;
+		if (texX < 0)
+			texX += texWidth;
+
 		ColorRGBA color;
+		const uint8_t *wallTexture;
 		switch (MAP[xy2index(mapBox.x, mapBox.y, MAP_SIZE)])
 		{
 			case 1:
-				color = RGBA_Red;
+				wallTexture = PURPLESTONE_TEXTURE;
 				break;
 			case 2:
-				color = RGBA_Green;
+				wallTexture = MOSSYSTONE_TEXTURE;
 				break;
 			case 3:
-				color = RGBA_Blue;
+				wallTexture = MOSSYSTONE_TEXTURE;
 				break;
 		}
-		if (side == NorthSouth)
+		for (int y = drawStart; y < drawEnd; ++y)
+		{
+			int texY = (((y * 2 - SCREEN_HEIGHT + lineHeight) << 6) / lineHeight) / 2;
+			uint32_t color = wallTexture[texWidth * texY + texX];
+			SDL_SetRenderDrawColor(state->renderer, (color >> 24) & 0xFF, (color >> 16) & 0xFF, (color >> 8) & 0xFF, color & 0xFF);
+			SDL_RenderDrawPoint(state->renderer, x, y);
+		}
+		/**
+		 * if (side == NorthSouth)
 		{
 			color.r /= 2;
 			color.g /= 2;
@@ -106,6 +125,7 @@ void render(State *state, Player *player)
 		}
 		SDL_SetRenderDrawColor(state->renderer, color.r, color.g, color.b, color.a);
 		SDL_RenderDrawLine(state->renderer, x, drawStart, x, drawEnd);
+		*/
 		SDL_SetRenderDrawColor(state->renderer, colorCeiling.r, colorCeiling.g, colorCeiling.b, colorCeiling.a);
 		SDL_RenderDrawLine(state->renderer, x, 0, x, drawStart);
 		SDL_SetRenderDrawColor(state->renderer, colorFloor.r, colorFloor.g, colorFloor.b, colorFloor.a);
